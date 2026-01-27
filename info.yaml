@@ -11,3 +11,20 @@ project:
     - game
     - hardware
     - tinytapeout
+
+pinout:
+  clk:
+    type: input
+    description: "Clock signal"
+  rst_n:
+    type: input
+    description: "Active-low reset"
+  ui_in[0]:
+    type: input
+    description: "Player button"
+  uo_out[3:0]:
+    type: output
+    description: "Player position"
+  uo_out[7:4]:
+    type: output
+    description: "Score"
