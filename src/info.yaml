@@ -1,6 +1,6 @@
 project:
   title: "Tiny Game Engine"
-  author: "elias"
+  author: "eli"
   description: "Mini hardware game engine with score and collision logic"
   language: "Verilog"
   clock_hz: 1000000
