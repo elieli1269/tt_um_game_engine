@@ -11,9 +11,7 @@ project:
     - game
     - hardware
     - tinytapeout
-  tiles:
-    cols: 1
-    rows: 1
+  tiles: "1x1"
 
 pinout:
   clk:
