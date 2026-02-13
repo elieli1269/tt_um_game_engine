@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EliCompaniesStar Arena FPS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="hud">
+      <div id="left-panel">
+        <h1>EliCompaniesStar Arena</h1>
+        <p>WASD: bouger · Souris: viser · Clic maintenu: tir automatique</p>
+      </div>
+      <div id="stats">
+        <span id="hp">HP 100</span>
+        <span id="ammo">AUTO</span>
+        <span id="score">Score 0</span>
+        <span id="players">Joueurs 1</span>
+      </div>
+    </div>
+
+    <div id="crosshair">+</div>
+    <canvas id="gameCanvas"></canvas>
+
+    <script type="module" src="game.js"></script>
+  </body>
+</html>

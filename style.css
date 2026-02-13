@@ -1,0 +1,82 @@
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: #020409;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.18));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#left-panel h1 {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+  text-shadow: 0 1px 0 #000, 0 0 10px rgba(255,255,255,0.35);
+}
+
+#left-panel p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 1;
+  color: #eaf1ff;
+  text-shadow: 0 1px 0 #000;
+}
+
+#stats {
+  display: flex;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 0 1px 0 #000, 0 0 8px rgba(0, 0, 0, 0.85);
+}
+
+#stats span {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+#crosshair {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 22px;
+  height: 22px;
+  z-index: 4;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  color: #f8fbff;
+  text-shadow: 0 0 2px #000, 0 0 12px rgba(255, 255, 255, 0.95), 0 0 24px rgba(120, 180, 255, 0.9);
+  pointer-events: none;
+}
+
