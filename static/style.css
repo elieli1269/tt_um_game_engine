@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; margin: 0; background:#0f172a; color:#e2e8f0; }
+.container { max-width: 960px; margin: 0 auto; padding: 20px; }
+.card { background:#1e293b; border-radius:10px; padding:16px; margin:14px 0; }
+label { display:block; margin:8px 0; }
+select, textarea, input, button { width:100%; padding:10px; border-radius:6px; border:1px solid #334155; margin-top:4px; box-sizing:border-box; }
+button { background:#22c55e; border:none; font-weight:bold; cursor:pointer; margin-top:8px; }
+ul { list-style:none; padding:0; }
+li { border-bottom:1px solid #334155; padding:8px 0; }
+.call-buttons { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
