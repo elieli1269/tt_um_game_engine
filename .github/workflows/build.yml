@@ -1,0 +1,66 @@
+name: train-and-build-local-ai
+
+on:
+  workflow_dispatch:
+    inputs:
+      wikipedia_url:
+        description: "URL d'un dump Wikipedia (.txt/.jsonl)"
+        required: false
+        type: string
+      max_wiki_docs:
+        description: "Nombre max de docs à entraîner"
+        required: false
+        default: "5000"
+        type: string
+  push:
+    branches: ["main", "master"]
+
+jobs:
+  train-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build dependency
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Prepare training corpus
+        shell: bash
+        run: |
+          mkdir -p data models dist
+          if [ -n "${{ github.event.inputs.wikipedia_url }}" ]; then
+            echo "Downloading Wikipedia corpus..."
+            curl -L --fail "${{ github.event.inputs.wikipedia_url }}" -o data/wikipedia_corpus.txt
+          else
+            echo "No wikipedia_url provided, using README as seed corpus."
+            cp README.md data/wikipedia_corpus.txt
+          fi
+
+      - name: Train local model
+        run: |
+          python3 chat_local_model.py \
+            --train-only \
+            --wikipedia-dump data/wikipedia_corpus.txt \
+            --max-wiki-docs "${{ github.event.inputs.max_wiki_docs || '5000' }}" \
+            --model-out models/turbo_local_model.json
+
+      - name: Build executable
+        run: |
+          pyinstaller --onefile --name local_turbo_chat chat_local_model.py
+
+      - name: Save build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-ai-build
+          path: |
+            dist/local_turbo_chat
+            models/turbo_local_model.json
