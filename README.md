@@ -1,24 +1,31 @@
 # tt_um_game_engine
 TinyTapeout project: a mini hardware game engine with score and collision logic.
 
-## Chat IA avec votre propre modèle
-Un script Python est fourni pour lancer un chat CLI avec votre modèle local ou un modèle Hugging Face.
+## Chat IA local (sans API) avec entraînement continu
+Le script `chat_local_model.py` fonctionne **sans API externe** et entraîne un modèle local léger en continu.
 
-### Prérequis
+### Fonctionnalités
+- Entraînement initial sur un dump Wikipedia local (`.txt` ou `.jsonl`).
+- Recherche web à la demande (`/web ...`), résumé local, puis ré-entraînement sur ce résumé.
+- Apprentissage continu : chaque message utilisateur **et** chaque réponse assistant sont réinjectés en entraînement.
+- `turboquant` intégré : quantization dynamique des poids pour garder un modèle léger.
+
+### Lancement simple
 ```bash
-pip install torch transformers
+python3 chat_local_model.py
 ```
 
-### Lancement
+### Lancement avec pré-entraînement Wikipedia
 ```bash
-python3 chat_local_model.py --model /chemin/vers/votre_modele
+python3 chat_local_model.py --wikipedia-dump ./wikipedia.jsonl --max-wiki-docs 5000
 ```
 
-Options utiles :
-- `--device cpu|cuda`
-- `--max-new-tokens 256`
-- `--temperature 0.7`
+### Commandes pendant le chat
+- `/web votre requête` : fait une recherche web + résumé + entraînement.
+- `/quit` : quitte.
 
-Commandes pendant le chat :
-- `/reset` : efface l'historique
-- `/quit` : quitte le chat
+### Paramètres utiles
+- `--order 3` : ordre du modèle n-gram.
+- `--temperature 0.9` : diversité de génération.
+- `--max-new-tokens 60` : longueur max de réponse.
+- `--disable-turboquant` : désactive la quantization dynamique.
